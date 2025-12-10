@@ -29,17 +29,17 @@ export const CanvasEditor: React.FC<CanvasEditorProps> = ({
   // Removed bg-white so there's no white box behind.
 
   return (
-    <div className="relative w-full h-full overflow-auto bg-slate-900/50 flex justify-center items-start p-4 rounded-lg border border-slate-700 shadow-inner">
+    <div className="relative w-full h-full overflow-auto bg-slate-900/50 flex justify-center items-start p-4 rounded-lg border border-slate-700 shadow-inner print:bg-white print:border-none print:shadow-none print:p-0 print:block print:overflow-visible">
       <div 
         ref={containerRef}
-        className="relative shadow-2xl origin-top inline-block"
+        className="relative shadow-2xl origin-top inline-block print:shadow-none print:w-full"
         onClick={() => onSelectElement(null, 'text')} // Deselect on clicking empty space
       >
         {/* Background Image */}
         <img 
           src={template.imageUrl} 
           alt="Document Template" 
-          className="max-w-none block select-none pointer-events-none"
+          className="max-w-none block select-none pointer-events-none print:w-full print:h-auto"
           onLoad={() => setImgLoaded(true)}
           style={{ maxWidth: '100%', maxHeight: '80vh' }} 
         />
@@ -76,7 +76,7 @@ export const CanvasEditor: React.FC<CanvasEditorProps> = ({
                          e.stopPropagation();
                          onDeleteElement?.(template.logo!.id, 'logo');
                        }}
-                       className="absolute -top-3 -right-3 bg-red-600 text-white p-1 rounded-full hover:bg-red-700 shadow-sm"
+                       className="absolute -top-3 -right-3 bg-red-600 text-white p-1 rounded-full hover:bg-red-700 shadow-sm print:hidden"
                      >
                        <IconTrash className="w-3 h-3" />
                      </button>
@@ -121,7 +121,7 @@ export const CanvasEditor: React.FC<CanvasEditorProps> = ({
                          e.stopPropagation();
                          onDeleteElement?.(el.id, 'text');
                        }}
-                       className="absolute -top-3 -right-3 bg-red-600 text-white p-1 rounded-full hover:bg-red-700 shadow-sm z-50"
+                       className="absolute -top-3 -right-3 bg-red-600 text-white p-1 rounded-full hover:bg-red-700 shadow-sm z-50 print:hidden"
                      >
                        <IconTrash className="w-3 h-3" />
                      </button>
