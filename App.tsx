@@ -178,23 +178,8 @@ function App() {
   };
 
   const handleDownload = () => {
-    // Simple native canvas export logic
-    // We need to access the DOM nodes. A cleaner way in React without refs hell 
-    // is to use html2canvas logic, but since we want to avoid heavy deps, 
-    // we will guide the user or assume the browser print/screenshot capability 
-    // OR try a robust simple method. 
-    // Given the prompt asks for functionality, I will implement a DOM-to-Canvas approach
-    // directly if possible, or simulate the "Download" button triggering a print view.
-    // However, `html-to-image` is the standard "World Class" way.
-    // I will simulate the process by creating a new Image from the composed elements
-    // Since I cannot import libraries easily in this format, I will use window.print() 
-    // with a specific print stylesheet or inform the user.
-    
-    // Better approach: Since I built a CanvasEditor, I can actually draw to a hidden HTML5 Canvas.
-    // But rendering text with specific fonts/wrapping on raw canvas is hard.
-    
-    // Fallback: Notify user.
-    alert('سيتم تجهيز الصورة للتحميل. (في بيئة الإنتاج الحقيقية، يتم استخدام مكتبة html-to-image هنا).');
+    // We rely on the browser's print function which now has cleaner CSS via 'print:hidden' classes
+    // This allows saving as PDF or printing directly without the UI clutter.
     window.print(); 
   };
 
@@ -202,7 +187,7 @@ function App() {
 
   if (view === 'home') {
     return (
-      <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 p-6">
+      <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 p-6 print:hidden">
         <h1 className="text-4xl md:text-6xl font-bold text-blue-500 mb-8 font-sans drop-shadow-lg text-center">
           محرر المستندات المدرسية
         </h1>
@@ -235,7 +220,7 @@ function App() {
 
   if (view === 'admin-login') {
     return (
-      <div className="flex items-center justify-center min-h-screen bg-slate-900 p-4">
+      <div className="flex items-center justify-center min-h-screen bg-slate-900 p-4 print:hidden">
         <div className="bg-slate-800 p-8 rounded-xl shadow-2xl w-full max-w-md border border-slate-700">
           <button onClick={() => setView('home')} className="mb-4 text-slate-400 hover:text-white flex items-center gap-2 text-sm">
              <IconArrowLeft className="w-4 h-4" /> العودة
@@ -262,7 +247,7 @@ function App() {
 
   if (view === 'admin-dashboard') {
     return (
-      <div className="min-h-screen bg-slate-900 flex flex-col">
+      <div className="min-h-screen bg-slate-900 flex flex-col print:hidden">
         {/* Header */}
         <header className="bg-slate-800 border-b border-slate-700 p-4 flex justify-between items-center shadow-lg">
           <h1 className="text-xl font-bold text-blue-400">لوحة تحكم المدير</h1>
@@ -346,7 +331,7 @@ function App() {
       : templates.filter(t => t.category === selectedCategory);
 
     return (
-      <div className="min-h-screen bg-slate-900 flex flex-col">
+      <div className="min-h-screen bg-slate-900 flex flex-col print:hidden">
         <header className="bg-slate-800 border-b border-slate-700 p-4 flex justify-between items-center shadow-lg">
           <div className="flex items-center gap-4">
             <button onClick={() => setView('home')} className="text-slate-400 hover:text-white">
@@ -413,10 +398,10 @@ function App() {
     const mode = view === 'admin-editor' ? 'admin' : 'user';
     
     return (
-      <div className="flex h-screen bg-slate-900 overflow-hidden flex-col md:flex-row">
+      <div className="flex h-screen bg-slate-900 overflow-hidden flex-col md:flex-row print:block print:h-auto print:overflow-visible print:bg-white">
         
         {/* Right Sidebar (Controls) */}
-        <div className="order-2 md:order-1 h-1/3 md:h-full w-full md:w-80 shrink-0">
+        <div className="order-2 md:order-1 h-1/3 md:h-full w-full md:w-80 shrink-0 print:hidden">
             <Sidebar 
             mode={mode}
             template={currentTemplate}
@@ -438,7 +423,7 @@ function App() {
         </div>
 
         {/* Center Canvas */}
-        <div className="order-1 md:order-2 flex-1 relative bg-black/20 h-2/3 md:h-full overflow-hidden">
+        <div className="order-1 md:order-2 flex-1 relative bg-black/20 h-2/3 md:h-full overflow-hidden print:overflow-visible print:h-auto print:bg-white print:block">
            <CanvasEditor 
              template={currentTemplate}
              mode={mode}
