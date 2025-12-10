@@ -42,20 +42,21 @@
         cursor: crosshair;
       }
     </style>
-  <script type="importmap">
+<script type="importmap">
 {
   "imports": {
     "react": "https://aistudiocdn.com/react@^19.2.1",
     "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.1/",
     "react/": "https://aistudiocdn.com/react@^19.2.1/",
-    "@vitejs/plugin-react": "https://aistudiocdn.com/@vitejs/plugin-react@^5.1.2",
-    "vite": "https://aistudiocdn.com/vite@^7.2.7"
+    "vite": "https://aistudiocdn.com/vite@^7.2.7",
+    "@vitejs/plugin-react": "https://aistudiocdn.com/@vitejs/plugin-react@^5.1.2"
   }
 }
 </script>
 </head>
   <body class="bg-primary text-white min-h-screen font-sans">
     <div id="root"></div>
-    <script type="module" src="/index.tsx"></script>
+    <!-- Fixed: Use relative path './' instead of absolute '/' to prevent 404 on GitHub Pages -->
+    <script type="module" src="./index.tsx"></script>
   </body>
 </html>
