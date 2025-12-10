@@ -1,0 +1,4 @@
+/* 
+  Styles are now handled via Tailwind CDN in index.html for immediate preview support.
+  This file is kept for compatibility but styles are injected in the HTML head.
+*/
