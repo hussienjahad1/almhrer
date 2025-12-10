@@ -51,7 +51,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
   };
 
   return (
-    <div className="w-full md:w-80 bg-slate-800 border-r border-slate-700 flex flex-col h-full overflow-y-auto shrink-0 shadow-xl z-20">
+    <div className="w-full md:w-80 bg-slate-800 border-r border-slate-700 flex flex-col h-full overflow-y-auto shrink-0 shadow-xl z-20 print:hidden">
       <div className="p-4 border-b border-slate-700 flex justify-between items-center">
         <h2 className="text-xl font-bold text-blue-400">
           {mode === 'admin' ? 'لوحة التحكم' : 'تعديل المستند'}
